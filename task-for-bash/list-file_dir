@@ -1,0 +1,25 @@
+#!/bin/bash
+clear
+echo "список всех файлов и подкаталогов"
+sleep 1
+echo "выбирайте способ получения список файла: "
+sleep 1
+echo "1)ls - Способ командой ls /etc -al "
+echo "2)find - Способ командой find /etc -maxdepth 1 -type f && find /etc -maxdepth 1 -type d | sort"
+echo "3)All - Способо получения полного списка всех файлов и подкаталгов"
+read varr
+if [[ 1 = $varr ]] ; then
+   echo "Напиищите катагол"
+   read dir
+   ls $dir -al
+elif [[ $varr -eq 2 ]] ; then
+    echo "Напиищите катагол"
+    read dir
+    find $dir -maxdepth 1 -type f && find /etc -maxdepth 1 -type d | sort
+elif [[ $varr -eq 3 ]] ; then
+    echo "Напиищите катагол"
+    read dir
+    ls -R $dir | awk '/:$/&&f{s=$0;f=0} /:$/&&!f{sub(/:$/,"");s=$0;f=1;next} NF&&f{ print s"/"$0 }'
+else
+ echo "Ошибка, введите првилный вариант!"
+fi
