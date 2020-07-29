@@ -7,19 +7,28 @@ sleep 1
 echo "1)ls - Способ командой ls /etc -al "
 echo "2)find - Способ командой find /etc -maxdepth 1 -type f && find /etc -maxdepth 1 -type d | sort"
 echo "3)All - Способ получения полного списка всех файлов и подкаталогов"
+loop=1
+while [ $loop ]
+do
 read varr
-if [[ 1 = $varr ]] ; then
+if [[ 1 -eq $varr ]] ; then
    echo "Напиишите каталог"
    read dir
    ls $dir -al
+   break
 elif [[ $varr -eq 2 ]] ; then
     echo "Напиишите каталог"
     read dir
     find $dir -maxdepth 1 -type f && find /etc -maxdepth 1 -type d | sort
+    break
 elif [[ $varr -eq 3 ]] ; then
     echo "Напишите каталог"
     read dir
     ls -R $dir | awk '/:$/&&f{s=$0;f=0} /:$/&&!f{sub(/:$/,"");s=$0;f=1;next} NF&&f{ print s"/"$0 }'
+    break
 else
+ echo "============================================"
  echo "Ошибка, введите правилный вариант!"
+ echo "============================================"
 fi
+done
