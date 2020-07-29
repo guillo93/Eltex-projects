@@ -1,0 +1,6 @@
+#!/bin/bash
+echo "Cписок файлов c помощью sed"
+sleep 1
+echo "Напиишите каталог"
+read var
+ls -lah $var | sed "s/^[a-z-]*//" | sed "s/ /Вывод файла или папки: /" | sed 1d
