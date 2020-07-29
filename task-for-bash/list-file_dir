@@ -9,15 +9,15 @@ echo "2)find - Способ командой find /etc -maxdepth 1 -type f && fi
 echo "3)All - Способ получения полного списка всех файлов и подкаталогов"
 read varr
 if [[ 1 = $varr ]] ; then
-   echo "Напиищите каталог"
+   echo "Напиишите каталог"
    read dir
    ls $dir -al
 elif [[ $varr -eq 2 ]] ; then
-    echo "Напиищите каталог"
+    echo "Напиишите каталог"
     read dir
     find $dir -maxdepth 1 -type f && find /etc -maxdepth 1 -type d | sort
 elif [[ $varr -eq 3 ]] ; then
-    echo "Напиите каталог"
+    echo "Напишите каталог"
     read dir
     ls -R $dir | awk '/:$/&&f{s=$0;f=0} /:$/&&!f{sub(/:$/,"");s=$0;f=1;next} NF&&f{ print s"/"$0 }'
 else
