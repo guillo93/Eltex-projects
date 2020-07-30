@@ -1,0 +1,30 @@
+#!/bin/bash
+clear
+echo "создаётся 50 папок в указанной, в каждой из 50ти папок создаётся еще 100 подпапок, и в каждой из этих подпапок создать 200 пустых файлов."
+sleep 1
+dir_del=$(find  -maxdepth 1 -type d | grep "AutoFolder$")
+if [[ $dir_del == './AutoFolder' ]] ; then
+ echo 'Повторная папка удалена'
+ rm -R AutoFolder
+fi
+sleep 1
+mkdir AutoFolder
+sleep 1
+count=0
+while [ $count -le 50 ]
+do
+  mkdir AutoFolder/Folder_$count
+  f_ct=0
+  while [ $f_ct -le 100 ]
+  do
+   mkdir AutoFolder/Folder_$count/Sub_folder_$f_ct
+   file=0
+   while [ $file -le 200 ]
+   do
+    touch AutoFolder/Folder_$count/Sub_folder_$f_ct/file_$file.txt
+    file=$[ $file+1 ]
+   done
+   f_ct=$[ $f_ct+1 ]
+  done
+count=$[ $count+1 ]
+done
