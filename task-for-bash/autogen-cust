@@ -1,0 +1,54 @@
+#!/bin/bash
+clear
+echo "создайте такое количество папок, подпапок и файлов сколько желаете"
+sleep 1
+echo "Введите имя основной папки:"
+read Fd
+echo "напишите желаемое местоположение для основной папки (введите 'pwd' для текущей директории):"
+read to_fd
+if [[ $to_fd == "pwd" ]] ; then
+  PWD=$(pwd)
+  to_fd=$PWD
+fi
+echo "Введите имя подпапки первого уровня:"
+read sub_fd
+echo "Введите количестов подпапки:"
+read c_fd
+echo "Введите имя подпапки второго уровня:"
+read s_fd
+echo "Напишите их количество:"
+read cs_fd
+echo "Напишите имя файлов:"
+read n_fl
+echo "Введите количество файлов:"
+read c_fl
+sleep 1
+sudo mkdir $to_fd/$Fd
+sleep 1
+count=1
+echo "Подождите немного, пока создаются ваши папки!"
+sleep 1
+echo "Подготовка к созданию папки $Fd , которая состоит из $c_fd подпапки(ок) первого уровня, $cs_fd подпапки(ок) второго уровня и $c_fl файла(ов)..."
+while [ $count -le $c_fd ]
+do
+  echo "."
+  mkdir $to_fd/$Fd/$sub_fd-$count
+  echo "Создание папок к адресу: $to_fd/$Fd/$sub_fd-$count"
+  f_ct=1
+  while [ $f_ct -le $cs_fd ]
+  do
+   mkdir $to_fd/$Fd/$sub_fd-$count/$s_fd-$f_ct
+   file=1
+   while [ $file -le $c_fl ]
+   do
+    touch $to_fd/$Fd/$sub_fd-$count/$s_fd-$f_ct/$n_fl-$file.txt
+    file=$[ $file+1 ]
+   done
+   f_ct=$[ $f_ct+1 ]
+  done
+count=$[ $count+1 ]
+done
+echo "..."
+echo "..."
+echo "..."
+echo "папки, подпапки и файлы созданы по адресу: $to_fd/$Fd"
